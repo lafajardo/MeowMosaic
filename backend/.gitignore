@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+
+# Compiled JavaScript files
+dist/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment files
+.env
+
+# Logs
+logs/
+*.log
+
+# npm package lock file (optional, depending on your preference)
+package-lock.json
+
+# OS-specific files (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# IDE/editor files (VSCode, JetBrains, etc.)
+.vscode/
+.idea/
+
+# Optional: Ignore test coverage reports
+coverage/
