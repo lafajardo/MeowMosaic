@@ -11,6 +11,6 @@ Create a file in the ```backend``` directory called ```.env```. This will hold a
 PORT=3000
 ```
 
-To start the express backend locally, ```cd backend``` and run the command ```npx ts-node src/index.t```.
+To start the express backend locally, ```cd backend``` and run the command ```npx ts-node src/index.ts```.
 
 To start the angular frontend locally, ```cd frontend``` and run the command ```ng serve```
