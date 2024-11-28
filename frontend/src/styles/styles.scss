@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+@use './theme.scss' as mm-theme;
+
+@include mat.core();
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+@mixin nav-bar-mobile($theme) {
+    .nav-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        position: fixed;
+
+        width: 100%;
+        padding: 5px 0 5px 0;
+
+        background-color: mat.get-theme-color($theme, primary) !important;
+        z-index: 1000;
+    }
+}
+
+@mixin apply-styles($theme) {
+    @include nav-bar-mobile($theme);
+}
+
+html {
+    @include mat.all-component-themes(mm-theme.$dark-theme);
+    @include apply-styles(mm-theme.$dark-theme);
+
+    @media (prefers-color-scheme: light) {
+        @include mat.all-component-colors(mm-theme.$light-theme);
+        @include apply-styles(mm-theme.$light-theme);
+    }
+}
