@@ -23,19 +23,41 @@ body {
         padding: 5px 0 5px 0;
 
         background-color: mat.get-theme-color($theme, primary) !important;
-        z-index: 1000;
+        z-index: 2000;
+    }
+
+    #content {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+}
+
+@mixin mat-card-styles($theme) {
+    mat-card {
+        margin: 5px;
+        height: auto;
+        width: 90%;
+        max-width: 385px;
+        img {
+            height: 300px;
+            object-fit: cover;
+        }
+        p {
+            height: 100px
+        }
     }
 }
 
 @mixin apply-styles($theme) {
     @include nav-bar-mobile($theme);
+    @include mat-card-styles($theme);
 }
 
 html {
     @include mat.all-component-themes(mm-theme.$dark-theme);
     @include apply-styles(mm-theme.$dark-theme);
 
-    @media (prefers-color-scheme: light) {
+    @media (prefers-color-scheme: dark) {
         @include mat.all-component-colors(mm-theme.$light-theme);
         @include apply-styles(mm-theme.$light-theme);
     }

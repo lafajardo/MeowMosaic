@@ -1,0 +1,9 @@
+<mini-nav-widget [buttonList]="buttonList" class=""></mini-nav-widget>
+
+<div id="content">
+    <router-outlet></router-outlet>
+    
+    <button (click)="openLogin()" mat-flat-button>Login</button>
+    
+    <button (click)="openPostEditor()" mat-flat-button>Edit</button>
+</div>
