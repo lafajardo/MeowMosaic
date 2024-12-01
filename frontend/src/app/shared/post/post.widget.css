@@ -1,0 +1,10 @@
+.like-container {
+    display: flex;
+    align-items: right;
+    gap: 10px;
+}
+
+.inner-like-container {
+    background-color: #365E9D;
+    border-radius: 40px;
+}

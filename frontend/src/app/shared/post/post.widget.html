@@ -7,13 +7,17 @@
     <mat-card-content>
         <p>{{post.caption}}</p>
     </mat-card-content>
-    <mat-card-actions align="end">
-        <button style="margin: 0; padding: 0;" mat-flat-button disabledInteractive="true">
-            <mat-icon>thumb_up_off_alt</mat-icon>
-        </button>
-        {{post.score}}
-        <button style="margin: 0; padding: 0;" mat-flat-button>
-            <mat-icon>thumb_down_off_alt</mat-icon>
-        </button>
+    <mat-card-actions class="like-container" align="end">
+        <button (click)="openPostEditor()" mat-flat-button>Edit</button>
+
+        <div class="inner-like-container">
+            <button style="margin: 0; padding: 0;" mat-flat-button disabledInteractive="true">
+                <mat-icon>thumb_up_off_alt</mat-icon>
+            </button>
+                    {{post.score}}
+            <button style="margin: 0; padding: 0;" mat-flat-button>
+                <mat-icon>thumb_down_off_alt</mat-icon>
+            </button>
+        </div>
     </mat-card-actions>
 </mat-card>
