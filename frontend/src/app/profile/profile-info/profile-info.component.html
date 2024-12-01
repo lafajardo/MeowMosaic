@@ -1,20 +1,14 @@
-<div class="container">
+<div class="feed">
     <mat-card appearance="outlined">
         <mat-card-header>
             <mat-card-title>Profile</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <h3>Username</h3>
-            <p>filler</p>
-            <h3>Password</h3>
-            <p>filler</p>
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-flat-button>
-                <mat-icon>logout</mat-icon>
-                Logout
-            </button>
-            <button mat-flat-button>
+            <button (click)="openProfileEditor()" mat-flat-button>
                 <mat-icon>edit</mat-icon>
                 Edit
             </button>

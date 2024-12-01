@@ -1,21 +1,23 @@
-import { User } from "../models"; 
+import { User } from '@prisma/client';
+
+import { CreateUser } from '@shared/types/createUser';
+import { UpdateUser } from '@shared/types/updateUser';
 
 const bcrypt = require('bcrypt')
-const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const createUser = async (newUser: User) => {
+export const createUser = async (newUser: CreateUser) => {
     const hashedPassword = await bcrypt.hash(newUser.password, 10);
     return await prisma.user.create({
         data: {
-            username: newUser.username, 
+            username: newUser.username,
             email: newUser.email,
             password: hashedPassword,
         },
     })
 }
 
-const getUserByID = async (userID: number) => {
+export const getUserByID = async (userID: number) => {
     return await prisma.user.findUnique({
         where: {
             id: userID,
@@ -23,20 +25,31 @@ const getUserByID = async (userID: number) => {
     });
 }
 
-const updateUser = async (userID: number, newUser: User) => {
+export const getUserPosts = async (userID: number) => {
+    return await prisma.user.findUnique({
+        where: {
+            id: userID,
+        },
+        include: {
+            posts: true,
+        }
+    });
+}
+
+export const updateUser = async (userID: number, newUser: UpdateUser) => {
     return await prisma.user.update({
         where: {
             id: userID,
         },
         data: {
-            username: newUser.username, 
-            email: newUser.email,
-            password: await bcrypt.hash(newUser.password, 10),
+            ...(newUser.username && { username: newUser.username }),
+            ...(newUser.email && { email: newUser.email }),
+            ...(newUser.password && { password: await bcrypt.hash(newUser.password, 10) }),
         },
     });
 }
 
-const deleteUser = async (userID: number) => {
+export const deleteUser = async (userID: number) => {
     return await prisma.user.delete({
         where: {
             id: userID,

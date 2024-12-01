@@ -7,17 +7,20 @@
     <mat-card-content>
         <p>{{post.caption}}</p>
     </mat-card-content>
-    <mat-card-actions class="like-container" align="end">
+    <mat-card-actions align="end">
+        @if (canEdit) {
         <!-- Moving Button Inside of mat-card, check TS file in component for logic to import this button over -->
-        <!-- <button (click)="openPostEditor()" mat-flat-button>Edit</button> -->
-
-        <div class="inner-like-container">
-            <button style="margin: 0; padding: 0;" mat-flat-button disabledInteractive="true">
-                <mat-icon>thumb_up_off_alt</mat-icon>
+            <button (click)="openPostEditor()" mat-icon-button>
+                <mat-icon>edit</mat-icon>
             </button>
-                    {{post.score}}
-            <button style="margin: 0; padding: 0;" mat-flat-button>
-                <mat-icon>thumb_down_off_alt</mat-icon>
+        }
+        <div class="post-widget-button">
+            <button mat-icon-button>
+                <mat-icon style="margin: 0; padding: 0;">thumb_up_off_alt</mat-icon>
+            </button>
+            <span>{{post.score}}</span>
+            <button mat-icon-button>
+                <mat-icon style="margin: 0; padding: 0;">thumb_down_off_alt</mat-icon>
             </button>
         </div>
     </mat-card-actions>

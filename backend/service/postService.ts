@@ -1,6 +1,6 @@
-import { Post } from "../models";
+import { CreatePost } from '@shared/createPost';
 
-const createPost = async (newPost: Post) => {
+const createPost = async (newPost: CreatePost) => {
     return await prisma.post.create({
         data: newPost,
     });
@@ -14,7 +14,7 @@ const getTopFivePosts = async () => {
 
 };
 
-const updatePost = async (postID: number, newPost: Post) => {
+const updatePost = async (postID: number, newPost: UpdatePost) => {
     return await prisma.post.update({
         where: {
             id: postID,

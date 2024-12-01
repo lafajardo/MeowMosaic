@@ -15,7 +15,7 @@ export class ProfilePostsComponent {
     title: "Cute Cat",
     caption: "Just a picture of an adorable cat",
     date: "11/30/24",
-    image: "/cutecat2.jpg",
-    score: 0,
+    image: "/images/cutecat2.jpg",
+    score: 119,
 }
 }
