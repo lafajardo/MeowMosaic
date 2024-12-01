@@ -7,13 +7,13 @@
     <router-outlet></router-outlet>
 </div>
 <div id="bottom" class="nav-bar">
-    <a routerLink="" mat-flat-button>
+    <a routerLink="/feed" mat-flat-button>
         <mat-icon style="margin: 0; padding: 0;">feed</mat-icon>
     </a>
-    <a  routerLink="" mat-flat-button>
+    <a  (click)="openPostCreator()" mat-flat-button>
         <mat-icon style="margin: 0; padding: 0;">add</mat-icon>
     </a>
-    <a routerLink="" mat-flat-button>
+    <a routerLink="/profile/acct-info" mat-flat-button>
         <mat-icon style="margin: 0; padding: 0;">person</mat-icon>
     </a>
 </div>
