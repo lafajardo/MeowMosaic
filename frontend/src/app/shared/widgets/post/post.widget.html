@@ -1,0 +1,37 @@
+<mat-card appearance="outlined">
+    <img [src]="post.image" alt="Post image.">
+    <mat-card-header>
+        <mat-card-title>{{post.title}}</mat-card-title>
+        <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{post.caption}}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        @if (canEdit) {
+            <button (click)="openPostEditor()" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="openDeleteDialog()" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+        }
+        <div class="post-widget-button">
+            <button (click)="likeUpdate()" mat-icon-button>
+                @if (like) {
+                    <mat-icon style="margin: 0; padding: 0;">thumb_up_alt</mat-icon>
+                } @else {
+                    <mat-icon style="margin: 0; padding: 0;">thumb_up_off_alt</mat-icon>
+                }
+            </button>
+            <span>{{post.score}}</span>
+            <button (click)="dislikeUpdate()" mat-icon-button>
+                @if (dislike) {
+                    <mat-icon style="margin: 0; padding: 0;">thumb_down_alt</mat-icon>
+                } @else {
+                    <mat-icon style="margin: 0; padding: 0;">thumb_down_off_alt</mat-icon>
+                }
+            </button>
+        </div>
+    </mat-card-actions>
+</mat-card>

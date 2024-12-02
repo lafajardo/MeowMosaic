@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 
-import { LoginComponent } from '../../shared/login/login.component';
-import { MiniNavWidget } from '../../shared/mini-nav/mini-nav.widget';
+import { LoginComponent } from '../../shared/dialogs/login/login.component';
+import { MiniNavWidget } from '../../shared/widgets/mini-nav/mini-nav.widget';
 import { MiniNavButton } from '../../models/mini-nav-button.model';
-import { PostEditorComponent } from '../../shared/post-editor/post-editor.component';
+import { PostEditorComponent } from '../../shared/dialogs/post-editor/post-editor.component';
 
 @Component({
   selector: 'app-profile-page',
-  imports: [MatButtonModule, MiniNavWidget, RouterLink, RouterOutlet],
+  imports: [MatButtonModule, MiniNavWidget, RouterOutlet],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css'
 })

@@ -1,0 +1,23 @@
+<div class="dialog">
+    <h2 mat-dialog-title>Profile Editor</h2>
+    <mat-dialog-content>
+        <form [formGroup]="loginEditorForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password">
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true">Save</button>
+    </mat-dialog-actions>
+</div>

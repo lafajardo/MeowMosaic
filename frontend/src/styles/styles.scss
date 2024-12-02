@@ -23,13 +23,19 @@ body {
         padding: 5px 0 5px 0;
 
         background-color: mat.get-theme-color($theme, primary) !important;
-        z-index: 2000;
+        z-index: 1050;
     }
 
-    #content {
+    #main-page-outlet {
         padding-top: 50px;
         padding-bottom: 50px;
     }
+
+    #sub-page-outlet {
+        padding-top: 60px;
+        padding-bottom: 10px;
+    }
+    
 }
 
 @mixin mat-card-styles($theme) {
@@ -46,8 +52,13 @@ body {
             object-position: 50% 50%;
         }
 
-        p {
-            height: 100px;
+        mat-card-content {
+            margin-bottom: 10px;
+        }
+
+        mat-card-actions {
+            display: flex;
+            gap: 5px;
         }
     }
 
@@ -67,10 +78,17 @@ body {
             height: 250px;
             object-fit: cover;
             object-position: 50% 50%;
+            border-top-left-radius: var(--mdc-outlined-card-container-shape, var(--mat-sys-corner-medium));
+            border-top-right-radius: var(--mdc-outlined-card-container-shape, var(--mat-sys-corner-medium));
         }
 
         p {
-            height: 100px;
+            height: 8rem;
+        }
+
+        mat-card-actions {
+            display: flex;
+            gap: 5px;
         }
     }
 
@@ -78,12 +96,31 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 10px;
+    }
+}
+
+@mixin mat-dialog-styles($theme) {
+    .dialog {
+        h2 {
+            text-align: center;
+        }
+        
+        mat-form-field {
+            margin-top: 5px;
+            width: 100%;
+        }
+    }
+
+    .cdk-overlay-container {
+        z-index: 1100;
     }
 }
 
 @mixin apply-styles($theme) {
     @include nav-bar-mobile($theme);
     @include mat-card-styles($theme);
+    @include mat-dialog-styles($theme);
 }
 
 html {

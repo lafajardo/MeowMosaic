@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Post } from '../../models/post.model';
-import { PostWidget } from '../../shared/post/post.widget';
+import { PostWidget } from '../../shared/widgets/post/post.widget';
 
 @Component({
   selector: 'app-profile-posts',

@@ -8,7 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login-dialog',
   imports: [MatButtonModule, MatDialogModule, MatFormFieldModule, MatIcon, MatInputModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

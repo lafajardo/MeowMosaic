@@ -3,7 +3,7 @@
         <button mat-flat-button>MeowMosaic</button>
     </a>
 </div>
-<div id="content">
+<div id="main-page-outlet">
     <router-outlet></router-outlet>
 </div>
 <div id="bottom" class="nav-bar">
@@ -16,7 +16,7 @@
     <a routerLink="" mat-flat-button>
         <mat-icon style="margin: 0; padding: 0;">add</mat-icon>
     </a>
-    <button mat-flat-button>
+    <button (click)="openLogin()" mat-flat-button>
         <mat-icon style="margin: 0; padding: 0;">login</mat-icon>
     </button>
     <button mat-flat-button>

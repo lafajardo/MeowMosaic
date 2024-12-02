@@ -6,7 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { User } from '../../models/user.model';
 import { MatDialog } from '@angular/material/dialog';
-import { UserEditorComponent } from 'src/app/shared/user-editor/user-editor.component';
+import { UserEditorComponent } from 'src/app/shared/dialogs/user-editor/user-editor.component';
+import { DeleteAccountComponent } from 'src/app/shared/dialogs/delete-account/delete-account.component';
 
 @Component({
   selector: 'app-profile-info',
@@ -26,6 +27,14 @@ export class ProfileInfoComponent {
 
   openProfileEditor() {
     const dialogRef = this.dialog.open(UserEditorComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    }); 
+  }
+
+  openDeleteDialog() {
+    const dialogRef = this.dialog.open(DeleteAccountComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
