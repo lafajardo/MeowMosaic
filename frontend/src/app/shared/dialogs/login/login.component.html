@@ -1,5 +1,5 @@
 <div class="dialog">
-    @if (login) {
+    @if (loginPage) {
     <h2 mat-dialog-title>Welcome to Meow Mosaic!</h2>
     <mat-dialog-content>
         <form [formGroup]="loginForm">
@@ -20,7 +20,7 @@
     </mat-dialog-content>
     <mat-dialog-actions>
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [mat-dialog-close]="true">Login</button>
+        <button mat-button (click)="login()" [mat-dialog-close]="true" [disabled]="loginForm.invalid">Login</button>
     </mat-dialog-actions>
     } @else {
     <h2 mat-dialog-title>Create an Account</h2>
@@ -47,7 +47,7 @@
     </mat-dialog-content>
     <mat-dialog-actions>
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [mat-dialog-close]="true">Create account</button>
+        <button mat-button (click)="createAccount()" [mat-dialog-close]="true" [disabled]="newAccountForm.invalid">Create account</button>
     </mat-dialog-actions>
     }
 </div>

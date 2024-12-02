@@ -1,21 +1,5 @@
 <div class="feed">
-    <mat-card appearance="outlined">
-        <mat-card-header>
-            <mat-card-title>Profile</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <p>
-                Username: {{user.username}}<br><br>
-                Email: {{user.email}}
-            </p>
-        </mat-card-content>
-        <mat-card-actions align="end">
-            <button (click)="openProfileEditor()" mat-icon-button>
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button (click)="openDeleteDialog()" mat-icon-button>
-                <mat-icon>delete</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    @if (subject()) {
+        <profile-widget [subject]="subject()"></profile-widget>
+    }
 </div>

@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
+import { ProfileService } from 'src/app/profile/profile.service';
+
 @Component({
   selector: 'login-dialog',
   imports: [MatButtonModule, MatDialogModule, MatFormFieldModule, MatIcon, MatInputModule, ReactiveFormsModule],
@@ -15,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  protected login: Boolean = true;
+  protected loginPage: Boolean = true;
 
   protected loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -29,12 +31,36 @@ export class LoginComponent {
 
   hide = signal(true);
 
+  constructor(protected userSVC: ProfileService) { };
+
   showPassword(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
 
   switchView() {
-    this.login=!this.login;
+    this.loginPage = !this.loginPage;
+  }
+
+  login() {
+    const username = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
+    if (username && password) {
+      this.userSVC.login(username, password);
+    }
+  }
+
+  createAccount() {
+    const username = this.newAccountForm.value.username;
+    const email = this.newAccountForm.value.email;
+    const password = this.newAccountForm.value.password;
+    if (username && email && password) {
+      const newUser = {
+        username: username,
+        email: email,
+        password: password
+      };
+      this.userSVC.createAccount(newUser);
+    }
   }
 }
