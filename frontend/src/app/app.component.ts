@@ -4,7 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-
+import { MatDialog } from '@angular/material/dialog';
+import { PostCreatorComponent } from './shared/post-creator/post-creator.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './shared/dialogs/login/login.component';
 import { ProfileService } from './profile/profile.service';
