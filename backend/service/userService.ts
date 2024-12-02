@@ -3,10 +3,15 @@ import { User } from '@prisma/client';
 import { CreateUser } from '@shared/types/createUser';
 import { UpdateUser } from '@shared/types/updateUser';
 
+import { prisma } from './setupClient';
+import { passport } from '../app';
+import { LocalStrategy } from '../app';
+
 const bcrypt = require('bcrypt')
-const LocalStrategy = require('passport-local').Strategy;
+
 
 export const createUser = async (newUser: CreateUser) => {
+    console.log('hit');
     const hashedPassword = await bcrypt.hash(newUser.password, 10);
     return await prisma.user.create({
         data: {

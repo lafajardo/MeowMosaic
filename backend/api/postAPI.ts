@@ -1,3 +1,5 @@
+import { express } from "../app";
+
 const postAPI = express.Router();
 
 postAPI.post('/', (req: Request, res: Response) => {
@@ -20,4 +22,4 @@ postAPI.delete('/:id', (req: Request, res: Response) => {
     
 });
 
-module.exports(postAPI);
+module.exports = postAPI;

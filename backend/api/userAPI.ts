@@ -1,15 +1,35 @@
 import { Response, Request } from 'express';
 
-import { createUser, getUserByID, updateUser, deleteUser, getUserPosts } from 'service/userService';
+import { createUser, getUserByID, updateUser, deleteUser, getUserPosts } from '../service/userService';
+
+import { express } from '../app';
+import { passport } from '../app';
 
 interface AuthenticatedRequest extends Request {
     isAuthenticated: () => boolean;
     logout: (callback?: (err?: any) => void) => void;
+    login: (user: any, callback?: (err?: any) => void) => void;
+    user?: any;
 }
 
 const userAPI = express.Router();
 
-userAPI.post('/login', passport.authenticate("local"));
+userAPI.post('/login', (req: AuthenticatedRequest, res: Response) => {
+    passport.authenticate('local', (err: any, user: any, info: any) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server error', error: err });
+        }
+        if (!user) {
+            return res.status(401).json({ message: 'Authentication failed', error: info ? info.message : 'Unknown error' });
+        }
+        req.login(user, (err: any) => {
+            if (err) {
+                return res.status(500).json({ message: 'Login failed', error: err });
+            }
+            return res.status(200).json({ message: 'Login successful!', user: req.user });
+        });
+    })(req, res);
+});
 
 userAPI.post('/create-acct', async (req: Request, res: Response) => {
     try {
@@ -24,18 +44,6 @@ userAPI.post('/create-acct', async (req: Request, res: Response) => {
         });
     } catch (err) {
         return res.status(400).json({ message: 'User not created.' });
-    }
-});
-
-userAPI.get('/:id', async (req: Request, res: Response) => {
-    try {
-        const subject = await getUserByID(Number(req.params.id));
-        res.status(200).json({
-            message: 'User found.',
-            user: { id: subject.id, username: subject.username, email: subject.email },
-        });
-    } catch (err) {
-        return res.status(404).json({ message: 'User not found.' });
     }
 });
 
@@ -60,11 +68,17 @@ userAPI.get('/logout', (req: AuthenticatedRequest, res: Response) => {
     });
 });
 
-app.get('/authenticated', (req: AuthenticatedRequest, res: Response) => {
+userAPI.get('/authenticated', (req: AuthenticatedRequest, res: Response) => {
     if (req.isAuthenticated()) {
-        res.send('You are authenticated!');
+        res.json({
+            message: 'User is authenticated',
+            user: req.user
+        });
     } else {
-        res.status(401).send('You need to log in first.');
+        res.status(401).json({
+            message: 'User not authenticated',
+            user: null
+        });
     }
 });
 
