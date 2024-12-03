@@ -33,17 +33,7 @@ export class AppComponent {
   }
 
   openLogin() {
-    const dialogRef = this.dialog.open(LoginComponent);
-  }
-
-  openProfile() {
-    this.userSVC.isAuthenticated().subscribe((auth) => {
-      if (!auth) {
-        this.router.navigate(['posts/feed']);
-      } else {
-        this.router.navigate(['/profile/acct-info']);
-      }
-    });
+    this.dialog.open(LoginComponent);
   }
 
   logout() {

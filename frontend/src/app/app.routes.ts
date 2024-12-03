@@ -7,11 +7,14 @@ import { PostsPageComponent } from './posts/posts-page/posts-page.component';
 import { PostsFeedComponent } from './posts/posts-feed/posts-feed.component';
 import { PostsLeaderboardComponent } from './posts/posts-leaderboard/posts-leaderboard.component';
 
+import { AuthGuard } from 'src/auth.guard';
+
 export const routes: Routes = [
     {
         path: 'profile',
         title: 'Profile',
         component: ProfilePageComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'acct-info',
