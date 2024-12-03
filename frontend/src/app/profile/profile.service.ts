@@ -27,7 +27,7 @@ export class ProfileService {
     return this.http.post<{ message: string, user: User }>('http://localhost:3000/api/userAPI/login', { username, password }, { withCredentials: true }).subscribe({
       next: (response) => {
         this.myProfile.set(response.user);
-        this.router.navigate(['/profile/acct-info'])
+        this.router.navigate(['/profile/acct-info']);
         this.snackBar.open(`Logged in`, 'Close', { duration: 3000 });
       },
       error: () => {
@@ -65,6 +65,7 @@ export class ProfileService {
     return this.http.get<{ message: string }>('http://localhost:3000/api/userAPI/logout', { withCredentials: true }).subscribe({
       next: () => {
         this.myProfile.set({});
+        this.router.navigate(['/posts/feed']);
         this.snackBar.open(`Logged out`, 'Close', { duration: 3000 });
       },
       error: () => {
