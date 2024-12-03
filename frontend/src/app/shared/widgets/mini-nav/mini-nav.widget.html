@@ -1,6 +1,6 @@
 <div id="mini-nav">
     @for (button of buttonList; track button.id; let last = $last) {
-        <a [routerLink]="button.path" mat-button>{{button.title}}</a>
+        <span><a [routerLink]="button.path" mat-button>{{button.title}}</a></span>
         @if (!last) {
             <mat-divider id="divider" vertical="true"></mat-divider>
         }

@@ -8,11 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-post-creator',
-  imports: [MatButtonModule, MatDialogModule, MatFormFieldModule, MatIcon, MatInputModule],
+  imports: [MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule],
   templateUrl: './post-creator.component.html',
   styleUrl: './post-creator.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostCreatorComponent {
-
-}
+export class PostCreatorComponent {}

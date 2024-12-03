@@ -10,7 +10,7 @@ import { MiniNavButton } from '../../models/mini-nav-button.model';
 import { PostEditorComponent } from '../../shared/dialogs/post-editor/post-editor.component';
 
 @Component({
-  selector: 'app-profile-page',
+  selector: 'profile-page',
   imports: [MatButtonModule, MiniNavWidget, RouterOutlet],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css'

@@ -4,8 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { MatDialog } from '@angular/material/dialog';
-import { PostCreatorComponent } from './shared/post-creator/post-creator.component';
+import { PostCreatorComponent } from './shared/dialogs/post-creator/post-creator.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './shared/dialogs/login/login.component';
 import { ProfileService } from './profile/profile.service';
@@ -19,14 +18,22 @@ import { ProfileService } from './profile/profile.service';
 export class AppComponent {
   readonly dialog = inject(MatDialog);
 
-  constructor(protected userSVC: ProfileService) {}
+  constructor(protected userSVC: ProfileService) { }
+
+  openPostCreator() {
+    const dialogRef = this.dialog.open(PostCreatorComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   openLogin() {
     const dialogRef = this.dialog.open(LoginComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-    }); 
+    });
   }
 
   logout() {

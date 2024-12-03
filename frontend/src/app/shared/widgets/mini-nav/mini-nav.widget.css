@@ -14,6 +14,10 @@
     background-color: white;
 }
 
+span {
+    width: 85px;
+}
+
 #divider {
     height: 30px;
 }

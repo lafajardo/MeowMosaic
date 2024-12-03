@@ -4,12 +4,12 @@ import { Post } from '../../models/post.model';
 import { PostWidget } from '../../shared/widgets/post/post.widget';
 
 @Component({
-  selector: 'profile-posts',
+  selector: 'posts-feed',
   imports: [PostWidget],
-  templateUrl: './profile-posts.component.html',
-  styleUrl: './profile-posts.component.css'
+  templateUrl: './posts-feed.component.html',
+  styleUrl: './posts-feed.component.css'
 })
-export class ProfilePostsComponent {
+export class PostsFeedComponent {
   protected post1: Post = {
     id: 0,
     title: "Cute Cat",

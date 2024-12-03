@@ -10,6 +10,27 @@ body {
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+@mixin global-styles($theme) {
+    * {
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-track {
+            width: 0px;
+            height: 0px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: mat.get-theme-color($theme, outline);
+        }
+    }
+
+    body {
+        width: 100%;
+    }
+}
+
 @mixin nav-bar-mobile($theme) {
     .nav-bar {
         display: flex;
@@ -35,11 +56,13 @@ body {
         padding-top: 60px;
         padding-bottom: 10px;
     }
-    
+
 }
 
 @mixin mat-card-styles($theme) {
-    post-widget, profile-widget {
+
+    post-widget,
+    profile-widget {
         height: auto;
         width: 95%;
         max-width: 385px;
@@ -78,7 +101,7 @@ body {
         h2 {
             text-align: center;
         }
-        
+
         mat-form-field {
             margin-top: 5px;
             width: 100%;
@@ -91,6 +114,7 @@ body {
 }
 
 @mixin apply-styles($theme) {
+    @include global-styles($theme);
     @include nav-bar-mobile($theme);
     @include mat-card-styles($theme);
     @include mat-dialog-styles($theme);

@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { FeedPostsComponent } from './feed/feed-posts.component';
 import { ProfilePageComponent } from './profile/profile-page/profile-page.component';
 import { ProfileInfoComponent } from './profile/profile-info/profile-info.component';
 import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
+import { PostsPageComponent } from './posts/posts-page/posts-page.component';
+import { PostsFeedComponent } from './posts/posts-feed/posts-feed.component';
+import { PostsLeaderboardComponent } from './posts/posts-leaderboard/posts-leaderboard.component';
 
 export const routes: Routes = [
     {
@@ -24,13 +26,25 @@ export const routes: Routes = [
         ]
     }, 
     {
-        path: 'feed', 
-        title: 'Feed Posts',
-        component: FeedPostsComponent,
+        path: 'posts',
+        title: 'Posts',
+        component: PostsPageComponent,
+        children: [
+            {
+                path: 'feed',
+                title: 'Feed',
+                component: PostsFeedComponent,
+            },
+            {
+                path: 'leaderboard',
+                title: 'Leaderboard',
+                component: PostsLeaderboardComponent,
+            }
+        ]
     },
     {
         path: '',
-        redirectTo: 'profile/acct-info',
+        redirectTo: '/posts/feed',
         pathMatch: 'full',
     }
 ];
