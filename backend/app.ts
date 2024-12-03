@@ -6,6 +6,7 @@ export const passport = require("passport");
 export const LocalStrategy = require('passport-local').Strategy;
 
 const userAPIs = require('./api/userAPI');
+const postAPIs = require('./api/postAPI');
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/userAPI', userAPIs);
+app.use('/api/postAPI', postAPIs);
 
 app.listen(3000, () => {
     console.log('Running...');

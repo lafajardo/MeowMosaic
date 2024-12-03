@@ -9,11 +9,11 @@
             <mat-label>Caption</mat-label>
             <textarea matInput></textarea>
         </mat-form-field>
-        <label for="image-upload">Upload a cat Image:</label><br>
-        <input type="file" id="image-upload">
+        <label for="image-url">Enter a cat Image URL:</label><br>
+        <input type="text" id="image-url" placeholder="Enter the image URL here">
     </mat-dialog-content>
     <mat-dialog-actions>
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+        <button mat-button (click)="createPost()" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
     </mat-dialog-actions>
 </div>
