@@ -31,7 +31,7 @@ export class LoginComponent {
 
   hide = signal(true);
 
-  constructor(protected userSVC: ProfileService) { };
+  constructor(private userSVC: ProfileService) { };
 
   showPassword(event: MouseEvent) {
     this.hide.set(!this.hide());

@@ -1,6 +1,7 @@
 <div class="feed">
-    <post-widget [post]="post1" [canEdit]="true"></post-widget>
-    <post-widget [post]="post1" [canEdit]="true"></post-widget>
-    <post-widget [post]="post1" [canEdit]="true"></post-widget>
-    <post-widget [post]="post1" [canEdit]="true"></post-widget>
+    @for (post of posts(); track post.id) {
+        <post-widget [post]="post" [canEdit]="true"></post-widget>
+    } @empty {
+        <p>No posts! Hit the plus button to try making one!</p>
+    }
 </div>

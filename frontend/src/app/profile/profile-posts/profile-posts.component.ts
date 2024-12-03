@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Signal, signal } from '@angular/core';
 
 import { Post } from '../../models/post.model';
 import { PostWidget } from '../../shared/widgets/post/post.widget';
+import { ProfileService } from '../profile.service';
 
 @Component({
   selector: 'profile-posts',
@@ -10,12 +11,9 @@ import { PostWidget } from '../../shared/widgets/post/post.widget';
   styleUrl: './profile-posts.component.css'
 })
 export class ProfilePostsComponent {
-  protected post1: Post = {
-    id: 0,
-    title: "Cute Cat",
-    caption: "Just a picture of an adorable cat",
-    date: "11/30/24",
-    image: "/images/cutecat2.jpg",
-    score: 119,
+  protected posts: Signal<Post[]> = signal([]);
+
+  constructor(protected userSVC: ProfileService) {
+    this.posts = this.userSVC.myPosts;
   }
 }

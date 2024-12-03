@@ -16,9 +16,10 @@ import { ProfileService } from './profile/profile.service';
   imports: [MatButtonModule, MatIconModule, RouterLink, RouterOutlet],
 })
 export class AppComponent {
-  readonly dialog = inject(MatDialog);
-
-  constructor(protected userSVC: ProfileService) { }
+  constructor(
+    private dialog: MatDialog,
+    protected userSVC: ProfileService,
+  ) { }
 
   openPostCreator() {
     const dialogRef = this.dialog.open(PostCreatorComponent);
