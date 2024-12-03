@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 import { PostCreatorComponent } from './shared/dialogs/post-creator/post-creator.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './shared/dialogs/login/login.component';
 import { ProfileService } from './profile/profile.service';
 
@@ -18,26 +18,39 @@ import { ProfileService } from './profile/profile.service';
 export class AppComponent {
   constructor(
     private dialog: MatDialog,
+    private router: Router,
     protected userSVC: ProfileService,
   ) { }
 
   openPostCreator() {
-    const dialogRef = this.dialog.open(PostCreatorComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    this.userSVC.isAuthenticated().subscribe((auth) => {
+      if (auth) {
+        this.dialog.open(PostCreatorComponent);
+      } else {
+        this.router.navigate(['/posts/feed']);
+      }
     });
   }
 
   openLogin() {
     const dialogRef = this.dialog.open(LoginComponent);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  openProfile() {
+    this.userSVC.isAuthenticated().subscribe((auth) => {
+      if (!auth) {
+        this.router.navigate(['posts/feed']);
+      } else {
+        this.router.navigate(['/profile/acct-info']);
+      }
     });
   }
 
   logout() {
-    this.userSVC.logout();
+    this.userSVC.isAuthenticated().subscribe((auth) => {
+      if (auth) {
+        this.userSVC.logout();
+      } 
+    });
   }
 }

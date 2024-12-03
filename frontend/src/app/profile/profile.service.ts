@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PostCreatorComponent } from '../shared/dialogs/post-creator/post-creator.component';
+import { catchError, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class ProfileService {
 
   // Connected.
   login(username: string, password: string) {
-    return this.http.post<{ message: string, user: User }>('http://localhost:3000/api/userAPI/login', { username, password }).subscribe({
+    return this.http.post<{ message: string, user: User }>('http://localhost:3000/api/userAPI/login', { username, password }, { withCredentials: true }).subscribe({
       next: (response) => {
         this.myProfile.set(response.user);
         console.log('Successfully logged in: ', response);
@@ -67,11 +68,12 @@ export class ProfileService {
 
   // Connected.
   logout() {
-    return this.http.get<{ message: string }>('http://localhost:3000/api/userAPI/logout').subscribe({
+    return this.http.get<{ message: string }>('http://localhost:3000/api/userAPI/logout', { withCredentials: true }).subscribe({
       next: (response) => {
         this.myProfile.set({});
         console.log('Successfully logged out: ', response);
         this.snackBar.open(`Logged out`, 'Close', { duration: 3000 });
+        this.router.navigate(['/posts/feed']);
       },
       error: (err) => {
         console.error('Error logging out: ', err);
@@ -81,15 +83,21 @@ export class ProfileService {
   }
 
   isAuthenticated() {
-    return this.http.get<{ message: string, user: User }>('http://localhost:3000/api/userAPI/authenticated').subscribe({
-      next: (response) => {
-        this.myProfile.set(response.user);
-        console.log('User authenticated: ', response);
-      },
-      error: (err) => {
-        console.error('User not authenticated: ', err);
-      }
-    });
+    return this.http.get<{ message: string, user: User }>('http://localhost:3000/api/userAPI/authenticated', { withCredentials: true })
+      .pipe(
+        map((response) => {
+          if (response.user) {
+            this.myProfile.set(response.user);
+            return true;
+          } else {
+            return false;
+          }
+        }),
+        catchError((err) => {
+          this.snackBar.open(`Make an account or login to use this feature`, 'Close', { duration: 3000 });
+          return of(false);
+        })
+      );
   }
 
   updateUser(userID: number, updatedUser: UpdateUser) {

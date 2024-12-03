@@ -6,6 +6,7 @@ import { express } from '../app';
 import { passport } from '../app';
 
 interface AuthenticatedRequest extends Request {
+    session: any;
     isAuthenticated: () => boolean;
     logout: (callback?: (err?: any) => void) => void;
     login: (user: any, callback?: (err?: any) => void) => void;
@@ -64,7 +65,12 @@ userAPI.get('/logout', (req: AuthenticatedRequest, res: Response) => {
         if (err) {
             return res.status(500).json({ message: 'Logout failed.', error: err.message });
         }
-        res.status(200).json({ message: 'Logout successful.' });
+        res.clearCookie('connect.sid', {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax',
+        });
+        res.status(200).json({ message: 'Logout successful' });
     });
 });
 
