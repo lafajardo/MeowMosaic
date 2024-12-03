@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-
+import axios from 'axios';
 import { createUser, getUserByID, updateUser, deleteUser, getUserPosts } from '../service/userService';
 
 import { express } from '../app';
@@ -14,6 +14,25 @@ interface AuthenticatedRequest extends Request {
 }
 
 const userAPI = express.Router();
+
+userAPI.post('/verify-email', async (req: Request, res: Response) => {
+    const { email } = req.body;
+    const apiKey = '1TkpaYyVcEehRrkVtSsyb'; // Replace with your actual API key
+    const apiUrl = `https://apps.emaillistverify.com/api/verifyEmail?secret=${apiKey}&email=${email}`;
+
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }
+
+    try {
+        const response = await axios.get(apiUrl);
+        const  result  = response.data;
+
+        res.status(200).json({ result });
+    } catch (err) {
+        return res.status(400).json({ message: 'Email validation failed.' });
+    }
+});
 
 userAPI.post('/login', (req: AuthenticatedRequest, res: Response) => {
     passport.authenticate('local', (err: any, user: any, info: any) => {

@@ -34,6 +34,21 @@ export class ProfileService {
         this.snackBar.open(`Invalid username or password`, 'Close', { duration: 3000 });
       }
     });
+  }    
+
+  validateEmail(email: string) {
+    const url = 'http://localhost:3000/api/userAPI/verify-email';
+    return this.http.post<{ result: string }>(url, { email }).pipe(
+      map((response) => response.result === 'ok'),
+      catchError(() => {
+        this.snackBar.open('Error validating email. Please try again later.', 'Close', { duration: 3000 });
+        return of(false);
+      })
+    );
+  }
+
+  showError(message: string){
+    this.snackBar.open(message, 'Close', { duration: 3000 });
   }
 
   // Connected.
