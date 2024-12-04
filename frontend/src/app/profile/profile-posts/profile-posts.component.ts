@@ -1,8 +1,9 @@
-import { Component, Signal, signal } from '@angular/core';
+import { Component, WritableSignal, signal } from '@angular/core';
 
 import { Post } from '../../models/post.model';
 import { PostWidget } from '../../shared/widgets/post/post.widget';
 import { ProfileService } from '../profile.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'profile-posts',
@@ -11,9 +12,15 @@ import { ProfileService } from '../profile.service';
   styleUrl: './profile-posts.component.css'
 })
 export class ProfilePostsComponent {
-  protected posts: Signal<Post[]> = signal([]);
+  protected subject: WritableSignal<User> = signal({} as User);
+  protected posts: WritableSignal<Post[]> = signal([]);
 
   constructor(protected userSVC: ProfileService) {
+    this.subject = this.userSVC.myProfile;
     this.posts = this.userSVC.myPosts;
+  }
+
+  ngOnInit() {
+    this.userSVC.getUserPosts(this.subject().id?? -1);
   }
 }
