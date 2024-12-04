@@ -4,9 +4,12 @@ the PostgreSQL table and types of posts when carrying out CRUD operations, all p
 optional.
 */
 
+import { Post } from "./post.model";
+
 export interface User {
     id?: number;
     username?: string;
     email?: string;
     password?: string;
+    posts?: Post[];
 }

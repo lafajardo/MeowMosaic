@@ -50,9 +50,11 @@ export class ProfileService {
 
 
   getUserPosts(userID: number) {
-    return this.http.get<{ message: string, userAPI: { posts: Post[] } }>(`http://localhost:3000/api/userAPI/posts/${userID}`).subscribe({
+    return this.http.get<{ message: string, user: { posts: Post[] } }>(`http://localhost:3000/api/userAPI/posts/${userID}`).subscribe({
       next: (response) => {
-        this.myPosts.set(response.userAPI.posts);
+        if (response.user.posts) {
+          this.myPosts.set(response.user.posts);
+        }
       },
       error: (err) => {
         console.error('Error retrieving user posts: ', err);
