@@ -1,21 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, signal, Signal, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { Post } from '../../models/post.model';
 import { PostWidget } from '../../shared/widgets/post/post.widget';
+import { PostService } from '../post.services';
 
 @Component({
   selector: 'posts-feed',
-  imports: [PostWidget],
+  imports: [CommonModule, PostWidget],
   templateUrl: './posts-feed.component.html',
-  styleUrl: './posts-feed.component.css'
+  styleUrls: ['./posts-feed.component.css']
 })
-export class PostsFeedComponent {
-  protected post1: Post = {
-    id: 0,
-    title: "Cute Cat",
-    caption: "Just a picture of an adorable cat",
-    date: "11/30/24",
-    image: "/images/cutecat2.jpg",
-    score: 119,
+export class PostsFeedComponent implements OnInit {
+  posts: Post[] = [];
+
+  constructor(private postSVC: PostService) {}
+
+  ngOnInit(): void {
+    // Fetch posts and update the signal
+    this.postSVC.getAllPosts();
+    
+    // Directly access the signal's value
+    this.posts = this.postSVC.posts(); // This directly gives the current value of posts
   }
 }
+
