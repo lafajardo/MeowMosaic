@@ -14,6 +14,7 @@ import { DeletePostComponent } from '../../dialogs/delete-post/delete-post.compo
   templateUrl: './post.widget.html',
   styleUrl: './post.widget.css',
   encapsulation: ViewEncapsulation.None,
+
 })
 export class PostWidget {
   @Input() post!: Post;

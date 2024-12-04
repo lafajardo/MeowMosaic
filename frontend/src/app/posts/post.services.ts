@@ -2,6 +2,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post.model';
 import { tap } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class PostService {
 
   constructor(protected http: HttpClient) {}
 
-  createPost(title: string, caption: string, image: string) {
-    return this.http.post<{ message: string, post: Post }>('http://localhost:3000/api/postAPI/create-post', { title, caption, image }).subscribe({
+  createPost(title: string, caption: string, image: string, userID: number) {
+    return this.http.post<{ message: string, post: Post }>('http://localhost:3000/api/postAPI/create-post', { title, caption, image, userID}).subscribe({
       next: (response) => {
         console.log('Successfully created post: ', response);
       },

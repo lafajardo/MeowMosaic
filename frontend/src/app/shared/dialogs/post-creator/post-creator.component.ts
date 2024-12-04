@@ -8,9 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { PostService } from 'src/app/posts/post.services';
+import { ProfileService } from 'src/app/profile/profile.service';
 @Component({
   selector: 'app-post-creator',
-  imports: [MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule],
+  imports: [MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './post-creator.component.html',
   styleUrl: './post-creator.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,19 +23,23 @@ export class PostCreatorComponent {
     caption: new FormControl('', [Validators.required]),
     image: new FormControl('', [Validators.required]),
   });
-  constructor(protected postSVC: PostService) { };
+  constructor(
+    protected postSVC: PostService,
+    protected profileSVC: ProfileService // Inject ProfileService
+
+    ) { };
 
   createPost() {
     const title = this.newPostForm.value.title;
     const caption = this.newPostForm.value.caption;
     const image = this.newPostForm.value.image;
-    if (title && caption && image) {
-      // const newPost = {
-      //   title: title,
-      //   caption: caption,
-      //   image: image
-      // };
-      this.postSVC.createPost(title,caption,image);
+    const userID = this.profileSVC.myProfile().id; // Assuming the user object has an `id` field
+
+    if (title && caption && image && userID) {
+      this.postSVC.createPost(title,caption,image, userID);
+      console.log("LESSS GOOOO");
+    } else {
+      console.log("INVALID");
     }
   }
 

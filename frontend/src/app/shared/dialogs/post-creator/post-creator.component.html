@@ -1,19 +1,28 @@
 <div class="dialog">
     <h2 mat-dialog-title>Create Post</h2>
     <mat-dialog-content>
-        <mat-form-field appearance="outline">
-            <mat-label>Title</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Caption</mat-label>
-            <textarea matInput></textarea>
-        </mat-form-field>
-        <label for="image-url">Enter a cat Image URL:</label><br>
-        <input type="text" id="image-url" placeholder="Enter the image URL here">
+
+        <form [formGroup]="newPostForm">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Caption</mat-label>
+                <textarea matInput formControlName="caption"></textarea>
+            </mat-form-field>
+
+            <label for="image-url">Enter a cat Image URL:</label><br>
+            <input type="text" id="image-url" formControlName="image" placeholder="Enter the image URL here">
+
+        </form>
+
     </mat-dialog-content>
+
     <mat-dialog-actions>
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button (click)="createPost()" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+        <button mat-button (click)="createPost()" [mat-dialog-close]="true" [disabled]="newPostForm.invalid">Save</button>
     </mat-dialog-actions>
 </div>

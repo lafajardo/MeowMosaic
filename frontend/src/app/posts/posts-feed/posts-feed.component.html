@@ -1,6 +1,3 @@
-<div class="feed">
-    <post-widget [post]="post1" [canEdit]="false"></post-widget>
-    <post-widget [post]="post1" [canEdit]="false"></post-widget>
-    <post-widget [post]="post1" [canEdit]="false"></post-widget>
-    <post-widget [post]="post1" [canEdit]="false"></post-widget>
+<div class="posts-feed">
+  <post-widget *ngFor="let post of posts" [post]="post" [canEdit]="false"></post-widget>
 </div>
