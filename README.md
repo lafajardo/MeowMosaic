@@ -70,7 +70,8 @@ MeowMosaic is a web application where users can create, view, and interact with 
 - **User APIs**:
   - `/login`: User login.
   - `/create-acct`: Register a new user.
-  - `verify-email`: Verifies that the email the user is attempting to signup is real by sending a request to a 3rd party api and returning back whether it is real or not.
+  - `/verify-email`: Verifies that the email the user is attempting to signup is real by sending a request to a 3rd party api and returning back whether it is real or not.
+  - `/authenticated`: Checks if the user is authenticated. 
   - `/posts/:id`: Fetch posts created by a specific user.
   - `/logout`: Logout the user.
   - `/:id`: Update or delete a user.
