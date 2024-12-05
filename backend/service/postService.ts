@@ -38,25 +38,11 @@ export const updatePost = async (postID: number, newPost: UpdatePost) => {
         },
         data: {
             ...(newPost.title && { title: newPost.title }),
-            ...(newPost.caption && { caption: newPost.caption })
+            ...(newPost.caption && { caption: newPost.caption }),
+            ...(newPost.score && {score: newPost.score})
         },
     });
 };
-
-// export const updateCount = async (postID: number, newPost: UpdateCount) => {
-//         // Update the score (or count) of the post
-        
-//         return await prisma.post.update({
-//             where: {
-//                 id: postID,
-//             },
-//             data: {
-//                 score: count,
-//             },
-            
-//         });
-        
-// };
 
 export const deletePost = async (postID: number) => {
     return await prisma.post.delete({

@@ -49,11 +49,11 @@ postAPI.get('/leaderboard', async (req: Request, res: Response) => {
 // Update post
 postAPI.put('/:id', async(req: Request, res: Response) => {
     try {
-        const { title, caption } = req.body;
-        const updatedPost = await updatePost(Number(req.params.id), { title, caption });
+        const { title, caption, score} = req.body;
+        const updatedPost = await updatePost(Number(req.params.id), { title, caption, score });
         res.status(200).json({
             message: 'Post updated successfully.',
-            post: { title: updatedPost.title, caption: updatedPost.caption },  
+            post: { title: updatedPost.title, caption: updatedPost.caption, score: updatedPost.score },  
         });
     } catch (err) {
         return res.status(400).json({ message: 'Post not updated.' });

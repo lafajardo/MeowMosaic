@@ -6,4 +6,5 @@ some of the fields may stay the same.
 export interface UpdatePost {
     title?: string;
     caption?: string;
+    score?: number;
 }

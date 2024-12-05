@@ -48,8 +48,8 @@ export class PostService {
     });
   }
 
-  updatePost(postID: number, title: string, caption: string) {
-    return this.http.put<{ message: string, post: Post }>(`http://localhost:3000/api/postAPI/${postID}`, { title, caption }).subscribe({
+  updatePost(postID: number, title: string, caption: string, score: number) {
+    return this.http.put<{ message: string, post: Post }>(`http://localhost:3000/api/postAPI/${postID}`, { title, caption, score }).subscribe({
       next: (response) => {
         console.log('Successfully updated post: ', response);
       },
