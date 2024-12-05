@@ -1,6 +1,9 @@
 # MeowMosaic
 
-MeowMosaic is a web application where users can create, view, and interact with posts featuring pictures of cats spotted on campus. The platform includes features like creating accounts, uploading cat pictures, interacting with posts through likes or dislikes, and viewing leaderboards of the top-rated cat pictures. Scroll to the bottom to view the our video!
+MeowMosaic is a web application where users can create, view, and interact with posts featuring pictures of cats spotted on campus. The platform includes features like creating accounts, uploading cat pictures, interacting with posts through likes or dislikes, and viewing leaderboards of the top-rated cat pictures.
+
+## Video
+
 
 ## Features
 
@@ -83,9 +86,6 @@ MeowMosaic is a web application where users can create, view, and interact with 
   - `LoginComponent`: Handles login and account creation.
   - `UserEditorComponent`: Dialog for editing user details.
   - `DeleteAccountComponent`: Dialog for account deletion.
-
-# Video
-
 
 ## Setup and Installation
 
