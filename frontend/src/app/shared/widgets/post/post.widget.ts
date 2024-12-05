@@ -8,6 +8,7 @@ import { PostEditorComponent } from '../../dialogs/post-editor/post-editor.compo
 import { Post } from '../../../models/post.model';
 import { DeletePostComponent } from '../../dialogs/delete-post/delete-post.component';
 import { PostService } from 'src/app/posts/post.services';
+import { UpdatePost } from '@shared/types/updatePost';
 @Component({
   selector: 'post-widget',
   imports: [MatButtonModule, MatCardModule, MatIconModule],
@@ -81,11 +82,19 @@ export class PostWidget {
     if (this.like) {
       this.like = !this.like;
       this.dislike = this.like;
-      // this.postSVC.updatePost(this.post.id, this.post.title, this.post.caption, this.post.score - 1);
-      // this.post.score -= 1;     
+      if (typeof this.post.id != 'undefined' && typeof this.post.score != 'undefined') {
+        const updatedPost: UpdatePost = { score: this.post.score - 1 }
+        this.postSVC.updatePost(this.post.id, updatedPost);
+        window.location.reload();
+      }   
     } else {
       this.like = !this.like;
       this.dislike = !this.like;
+      if (typeof this.post.id != 'undefined' && typeof this.post.score != 'undefined') {
+        const updatedPost: UpdatePost = { score: this.post.score + 1 }
+        this.postSVC.updatePost(this.post.id, updatedPost);
+        window.location.reload();
+      }   
     }
   }
 
@@ -93,9 +102,19 @@ export class PostWidget {
     if (this.dislike) {
       this.dislike = !this.dislike;
       this.like = this.dislike;
+      if (typeof this.post.id != 'undefined' && typeof this.post.score != 'undefined') {
+        const updatedPost: UpdatePost = { score: this.post.score + 1 }
+        this.postSVC.updatePost(this.post.id, updatedPost);
+        window.location.reload();
+      }   
     } else {
       this.dislike = !this.dislike;
       this.like = !this.dislike;
+      if (typeof this.post.id != 'undefined' && typeof this.post.score != 'undefined') {
+        const updatedPost: UpdatePost = { score: this.post.score - 1 }
+        this.postSVC.updatePost(this.post.id, updatedPost);
+        window.location.reload();
+      }   
     }
   }
 }

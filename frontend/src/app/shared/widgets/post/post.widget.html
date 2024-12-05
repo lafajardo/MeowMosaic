@@ -25,7 +25,7 @@
                     <mat-icon style="margin: 0; padding: 0;">thumb_up_off_alt</mat-icon>
                 }
             </button>
-            <span>{{post.score}}</span>
+            <span>{{this.post.score}}</span>
             <button (click)="dislikeUpdate()" mat-icon-button>
                 @if (dislike) {
                     <mat-icon style="margin: 0; padding: 0;">thumb_down_alt</mat-icon>

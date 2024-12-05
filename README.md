@@ -132,11 +132,7 @@ cd meowmosaic
 cd backend
 npm install
 ```
-1. Create a ```.env``` file in the ```backend``` directory and past the following and make sure to save:
-```
-DATABASE_URL="postgresql://postgres.hjjhukimykzfjojglksf:s33Y0u@g@!n123@aws-0-us-west-1.pooler.supabase.com:5432/postgres"
-SESSION_SECRET="cc6142ff6474260d6fdcb27dda5365385607c2b41f1330776f2491a923aa97e2"    
-```
+1. Create a ```.env``` file in the ```backend``` directory and paste the following and make sure to save:
 
 2. Then start the backend
 ```npm start```
