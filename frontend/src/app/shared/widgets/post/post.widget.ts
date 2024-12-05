@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostEditorComponent } from '../../dialogs/post-editor/post-editor.component';
 import { Post } from '../../../models/post.model';
 import { DeletePostComponent } from '../../dialogs/delete-post/delete-post.component';
-
+import { PostService } from 'src/app/posts/post.services';
 @Component({
   selector: 'post-widget',
   imports: [MatButtonModule, MatCardModule, MatIconModule],
@@ -35,19 +35,42 @@ export class PostWidget {
     } 
   }
 
+  constructor(private postSVC: PostService) {}
+
   openPostEditor() {
-    const dialogRef = this.dialog.open(PostEditorComponent);
+    if (!this.post?.id) {
+      console.log("Post ID is missing!");
+      return;
+    }
+
+    const dialogRef = this.dialog.open(PostEditorComponent, {
+      data: { postID: this.post.id },
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+      if (result) {
+        console.log(`Post with ID ${this.post.id} updated.`);
+      } else {
+        console.log('Post update was canceled.');
+      }    });
   }
 
   openDeleteDialog() {
-    const dialogRef = this.dialog.open(DeletePostComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    if (!this.post?.id) {
+      console.error('Post ID is missing!');
+      return;
+    }
+  
+    const dialogRef = this.dialog.open(DeletePostComponent, {
+      data: { postID: this.post.id }, // Pass the post ID to the dialog, will retrieve in delete-post.component.ts
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(`Post with ID ${this.post.id} deleted.`);
+      } else {
+        console.log('Post deletion was canceled.');
+      }
     });
   }
 
@@ -55,6 +78,8 @@ export class PostWidget {
     if (this.like) {
       this.like = !this.like;
       this.dislike = this.like;
+      // this.postSVC.updatePost(this.post.id, this.post.title, this.post.caption, this.post.score - 1);
+      // this.post.score -= 1;     
     } else {
       this.like = !this.like;
       this.dislike = !this.like;

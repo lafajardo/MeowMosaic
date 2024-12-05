@@ -38,7 +38,8 @@ export const updatePost = async (postID: number, newPost: UpdatePost) => {
         },
         data: {
             ...(newPost.title && { title: newPost.title }),
-            ...(newPost.caption && { caption: newPost.caption })
+            ...(newPost.caption && { caption: newPost.caption }),
+            ...(newPost.score && {score: newPost.score})
         },
     });
 };
