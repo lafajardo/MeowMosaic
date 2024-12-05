@@ -1,17 +1,17 @@
 import { express } from "../app";
-import { createPost, getAllPosts, getTopFivePosts, updatePost, deletePost } from '../service/postService';
+import { createPost, getAllPosts, getTopFivePosts, updatePost, deletePost} from '../service/postService';
 import { Response, Request } from 'express';
 
 const postAPI = express.Router();
 
 postAPI.post('/create-post', async (req: Request, res: Response) => {
     try {
-        const { title, caption, image, userID } = req.body;
+        const { title, caption, image, userID} = req.body;
         if (!title || !caption || !image || !userID) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
 
-        const newPost = await createPost({ title, caption, image, userID });
+        const newPost = await createPost({ title, caption, image, userID});
         res.status(201).json({
             message: 'Post created successfully.',
             post: newPost,

@@ -36,10 +36,21 @@ export class PostWidget {
   }
 
   openDeleteDialog() {
-    const dialogRef = this.dialog.open(DeletePostComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    if (!this.post?.id) {
+      console.error('Post ID is missing!');
+      return;
+    }
+  
+    const dialogRef = this.dialog.open(DeletePostComponent, {
+      data: { postID: this.post.id }, // Pass the post ID to the dialog, will retrieve in delete-post.component.ts
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(`Post with ID ${this.post.id} deleted.`);
+      } else {
+        console.log('Post deletion was canceled.');
+      }
     });
   }
 
@@ -47,6 +58,7 @@ export class PostWidget {
     if (this.like) {
       this.like = !this.like;
       this.dislike = this.like;
+      this.post.score;
     } else {
       this.like = !this.like;
       this.dislike = !this.like;
