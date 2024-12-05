@@ -11,7 +11,6 @@ const bcrypt = require('bcrypt')
 
 
 export const createUser = async (newUser: CreateUser) => {
-    console.log('hit');
     const hashedPassword = await bcrypt.hash(newUser.password, 10);
     return await prisma.user.create({
         data: {
