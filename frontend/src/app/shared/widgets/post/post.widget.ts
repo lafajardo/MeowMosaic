@@ -30,11 +30,21 @@ export class PostWidget {
   constructor(private postSVC: PostService) {}
 
   openPostEditor() {
-    const dialogRef = this.dialog.open(PostEditorComponent);
+    if (!this.post?.id) {
+      console.log("Post ID is missing!");
+      return;
+    }
+
+    const dialogRef = this.dialog.open(PostEditorComponent, {
+      data: { postID: this.post.id },
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+      if (result) {
+        console.log(`Post with ID ${this.post.id} updated.`);
+      } else {
+        console.log('Post update was canceled.');
+      }    });
   }
 
   openDeleteDialog() {
