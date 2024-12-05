@@ -25,7 +25,15 @@ export class PostWidget {
 
   protected dislike: boolean = false;
 
-  readonly dialog = inject(MatDialog);
+  protected date: string = '';
+
+  constructor(readonly dialog: MatDialog) {}
+
+  ngOnInit() {
+    if (this.post.date) {
+      this.date = this.post.date.slice(0, 10).split('-').join('/');
+    } 
+  }
 
   openPostEditor() {
     const dialogRef = this.dialog.open(PostEditorComponent);
