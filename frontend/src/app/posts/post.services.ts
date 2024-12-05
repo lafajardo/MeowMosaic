@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post.model';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { UpdatePost } from '@shared/types/updatePost';
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +49,8 @@ export class PostService {
     });
   }
 
-  updatePost(postID: number, title: string, caption: string) {
-    return this.http.put<{ message: string, post: Post }>(`http://localhost:3000/api/postAPI/${postID}`, { title, caption}).subscribe({
+  updatePost(postID: number, updatedPost: UpdatePost) {
+    return this.http.put<{ message: string, post: Post }>(`http://localhost:3000/api/postAPI/${postID}`, updatedPost).subscribe({
       next: (response) => {
         console.log('Successfully updated post: ', response);
       },
@@ -59,7 +60,6 @@ export class PostService {
     });
   }
   
-
   deletePost(postID: number) {
     return this.http.delete<{ message: string }>(`http://localhost:3000/api/postAPI/${postID}`).subscribe({
       next: (response) => {

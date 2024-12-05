@@ -1,4 +1,4 @@
-import { Component, signal, Signal, OnInit } from '@angular/core';
+import { Component, signal, Signal, OnInit, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Post } from '../../models/post.model';
@@ -12,16 +12,15 @@ import { PostService } from '../post.services';
   styleUrls: ['./posts-feed.component.css']
 })
 export class PostsFeedComponent implements OnInit {
-  posts: Post[] = [];
+  posts: WritableSignal<Post[]> = signal([]);
 
-  constructor(private postSVC: PostService) {}
+  constructor(private postSVC: PostService) {
+    this.posts = this.postSVC.posts;
+  }
 
   ngOnInit(): void {
     // Fetch posts and update the signal
     this.postSVC.getAllPosts();
-    
-    // Directly access the signal's value
-    this.posts = this.postSVC.posts(); // This directly gives the current value of posts
   }
 }
 

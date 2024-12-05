@@ -27,15 +27,17 @@ export class PostWidget {
 
   protected date: string = '';
 
-  constructor(readonly dialog: MatDialog) {}
 
   ngOnInit() {
     if (this.post.date) {
       this.date = this.post.date.slice(0, 10).split('-').join('/');
-    } 
+    }
   }
 
-  constructor(private postSVC: PostService) {}
+  constructor(
+    readonly dialog: MatDialog,
+    private postSVC: PostService,
+  ) { }
 
   openPostEditor() {
     if (!this.post?.id) {
@@ -52,7 +54,8 @@ export class PostWidget {
         console.log(`Post with ID ${this.post.id} updated.`);
       } else {
         console.log('Post update was canceled.');
-      }    });
+      }
+    });
   }
 
   openDeleteDialog() {
@@ -60,11 +63,11 @@ export class PostWidget {
       console.error('Post ID is missing!');
       return;
     }
-  
+
     const dialogRef = this.dialog.open(DeletePostComponent, {
       data: { postID: this.post.id }, // Pass the post ID to the dialog, will retrieve in delete-post.component.ts
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log(`Post with ID ${this.post.id} deleted.`);

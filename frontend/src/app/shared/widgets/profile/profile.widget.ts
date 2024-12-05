@@ -27,10 +27,6 @@ export class ProfileWidget {
     }
 
     openDeleteDialog() {
-        const dialogRef = this.dialog.open(DeleteAccountComponent);
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog result: ${result}`);
-        });
+        this.dialog.open(DeleteAccountComponent);
     }
 }

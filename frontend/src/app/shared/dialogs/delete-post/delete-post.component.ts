@@ -25,6 +25,7 @@ export class DeletePostComponent {
     const postID = this.data.postID;
     if (postID) {
       this.postSVC.deletePost(postID);
+      window.location.reload();
       console.log(`Deleted post with ID: ${postID}`);
       this.dialogRef.close(true); // Close dialog and indicate success
     } else {

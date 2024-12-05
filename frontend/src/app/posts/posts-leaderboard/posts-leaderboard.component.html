@@ -1,3 +1,5 @@
-<div class="post-feed">
-    <post-widget *ngFor="let post of posts" [post]="post" [canEdit]="false"></post-widget>
+<div class="feed">
+    @for(post of posts(); track post.id){
+        <post-widget [post]="post" [canEdit]="false"></post-widget>
+    }
 </div>

@@ -25,22 +25,24 @@ export class PostCreatorComponent {
   });
   constructor(
     protected postSVC: PostService,
-    protected profileSVC: ProfileService // Inject ProfileService
-
+    protected profileSVC: ProfileService, // Inject ProfileService
     ) { };
 
   createPost() {
     const title = this.newPostForm.value.title;
     const caption = this.newPostForm.value.caption;
     const image = this.newPostForm.value.image;
-    const userID = this.profileSVC.myProfile().id; // Assuming the user object has an `id` field
+    const userID = this.profileSVC.myProfile().id;
 
     if (title && caption && image && userID) {
       this.postSVC.createPost(title,caption,image, userID);
+      setTimeout(() => {window.location.reload()}, 500);
+      
       console.log("LESSS GOOOO");
     } else {
       console.log("INVALID");
     }
+    
   }
 
 
