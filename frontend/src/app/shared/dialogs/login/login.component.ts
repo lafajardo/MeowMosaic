@@ -60,7 +60,18 @@ export class LoginComponent {
         email: email,
         password: password
       };
-      this.userSVC.createAccount(newUser);
+      this.userSVC.validateEmail(email).subscribe({
+        next: (isValid) => {
+          if (isValid){
+            this.userSVC.createAccount(newUser);
+          }else{
+            this.userSVC.showError('Invalid email address. Please provide a valid email.');
+          }
+        },
+        error: () => {
+          this.userSVC.showError('Error validating email. Please try again later.');
+        }
+      });
     }
   }
 }
