@@ -2,9 +2,6 @@
 
 MeowMosaic is a web application where users can create, view, and interact with posts featuring pictures of cats. The platform includes features like creating accounts, uploading cat pictures, interacting with posts through likes or dislikes, and viewing leaderboards of the top-rated cat pictures.
 
-## Video (WATCH TILL END)
-  - https://youtu.be/jn1jQOTGu6k
-
 ## Features
 
 - **User Management**: 
